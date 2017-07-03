@@ -14,7 +14,7 @@
         android:layout_centerVertical="true"
         android:background="?android:attr/selectableItemBackground"
         android:scaleType="centerInside"
-        tools:src="@mipmap/test"/>
+        tools:src="@drawable/test"/>
 
     <TextView
         android:id="@+id/title_tv"

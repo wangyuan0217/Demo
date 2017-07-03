@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -19,6 +18,7 @@ import android.widget.Toast;
 
 import com.judd.trump.R;
 import com.judd.trump.app.ActivityManager;
+import com.judd.trump.app.TApplication;
 import com.judd.trump.widget.permission.PermissionReq;
 
 
@@ -32,10 +32,6 @@ public abstract class TActivity extends AppCompatActivity
 
 
     public Context mContext;
-
-    protected abstract int getTitleBarColor();
-
-    protected abstract int getTitleBackImg();
 
     protected abstract void setContentView();
 
@@ -194,9 +190,8 @@ public abstract class TActivity extends AppCompatActivity
     }
 
     public void initTitle(String title, String subTitle, int subImgRes) {
-        findViewById(R.id.layout_title).setBackgroundColor(
-                ContextCompat.getColor(mContext, getTitleBarColor()));
-        findViewById(R.id.title_back).setBackgroundResource(getTitleBackImg());
+        findViewById(R.id.layout_title).setBackgroundColor(TApplication.getInstance().getThemeColor());
+        ((ImageView) findViewById(R.id.title_back)).setImageResource(TApplication.getInstance().getTitleBackImg());
         ((TextView) findViewById(R.id.title_tv)).setText(title);
         if (!TextUtils.isEmpty(subTitle))
             ((TextView) findViewById(R.id.title_right_tv)).setText(subTitle);

@@ -9,12 +9,20 @@ import com.judd.trump.app.TApplication;
 public class AppContext extends TApplication {
 
     @Override
-    public void setThemeColor() {
-        this.themeColor = R.color.thistle;
+    public int setThemeColor() {
+        return R.color.colorPrimaryDark;
+    }
+
+    @Override
+    public int setTitleBackImg() {
+        return R.mipmap.icon_back;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance = this;
     }
+
+
 }

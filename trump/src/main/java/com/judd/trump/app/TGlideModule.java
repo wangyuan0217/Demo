@@ -10,7 +10,7 @@ import com.bumptech.glide.module.GlideModule;
 /**
  * Created by Administrator on 2017/4/17.
  * <meta-data
- * android:name="io.futurestud.tutorials.glide.glidemodule.SimpleGlideModule"
+ * android:name="com.judd.trump.app.TGlideModule"
  * android:value="GlideModule" />
  */
 

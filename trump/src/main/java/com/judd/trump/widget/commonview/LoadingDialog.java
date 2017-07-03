@@ -12,7 +12,11 @@ import android.widget.TextView;
 
 import com.judd.trump.R;
 
-
+/**
+ * @author 王元_Trump
+ * @time 2017/7/3 14:17
+ * @desc copy from seal of rongim
+ */
 public class LoadingDialog extends Dialog {
 
     /**

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 
 import com.judd.trump.R;
+import com.judd.trump.app.TApplication;
 import com.judd.trump.widget.pickerview.lib.LoopView;
 
 import java.util.List;
@@ -76,6 +77,7 @@ public class PopDateHelper_YM extends PopupWindow {
         final LoopView loopView1 = (LoopView) view.findViewById(R.id.loopView1);
         final LoopView loopView2 = (LoopView) view.findViewById(R.id.loopView2);
         view.findViewById(R.id.loopView3).setVisibility(View.GONE);
+        btnOk.setTextColor(TApplication.getInstance().getThemeColor());
 
         loopView1.setItems(list_year);
         loopView2.setItems(list_month);

@@ -11,7 +11,7 @@ import java.util.Map;
  * @desc sharedPreference 数据存储
  * @time 2016/6/2 14:14
  */
-public class PreferenceUtil {
+public class PrefUtil {
 
     private SharedPreferences mShared;
 
@@ -25,7 +25,7 @@ public class PreferenceUtil {
      * @param mode    打开的模式。值为Context.MODE_APPEND, Context.MODE_PRIVATE,
      *                Context.WORLD_READABLE, Context.WORLD_WRITEABLE.
      */
-    public PreferenceUtil(Context context, String kvName, int mode) {
+    public PrefUtil(Context context, String kvName, int mode) {
         mShared = context.getSharedPreferences(kvName, mode);
         mEditor = mShared.edit();
     }
@@ -102,7 +102,7 @@ public class PreferenceUtil {
      * @param value 值。
      * @return 引用的KV对象。
      */
-    public PreferenceUtil put(String key, Object value) {
+    public PrefUtil put(String key, Object value) {
         if (value instanceof Boolean) {
             mEditor.putBoolean(key, (Boolean) value).commit();
         } else if (value instanceof Integer || value instanceof Byte) {
@@ -130,7 +130,7 @@ public class PreferenceUtil {
      * @param key 要移除的键名称。
      * @return 引用的KV对象。
      */
-    public PreferenceUtil remove(String key) {
+    public PrefUtil remove(String key) {
         mEditor.remove(key).commit();
         return this;
     }
@@ -140,7 +140,7 @@ public class PreferenceUtil {
      *
      * @return 引用的KV对象。
      */
-    public PreferenceUtil clear() {
+    public PrefUtil clear() {
         mEditor.clear().commit();
         return this;
     }

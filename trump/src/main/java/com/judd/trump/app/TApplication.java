@@ -1,6 +1,7 @@
 package com.judd.trump.app;
 
 import android.app.Application;
+import android.support.v4.content.ContextCompat;
 
 /**
  * Created by Administrator on 2017/6/15.
@@ -8,17 +9,29 @@ import android.app.Application;
 
 public abstract class TApplication extends Application {
 
-    protected int themeColor;
+
+    protected static TApplication mInstance;
+    protected int themeColor = setThemeColor();
+    protected int titleBackImg = setTitleBackImg();
 
     @Override
     public void onCreate() {
         super.onCreate();
-
     }
 
-    public abstract void setThemeColor();
+    public static TApplication getInstance() {
+        return mInstance;
+    }
+
+    public abstract int setThemeColor();
+
+    public abstract int setTitleBackImg();
 
     public int getThemeColor() {
-        return themeColor;
+        return ContextCompat.getColor(mInstance, themeColor);
+    }
+
+    public int getTitleBackImg() {
+        return titleBackImg;
     }
 }

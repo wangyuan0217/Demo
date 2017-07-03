@@ -2,12 +2,7 @@ package com.judd.trump.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.WindowManager;
-
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 /**
  * @author 王元_Trump
@@ -17,7 +12,7 @@ import java.io.IOException;
 public class CommonUtil {
 
     public static String formatDoule(double money) {
-        return new java.text.DecimalFormat("0.00").format(money);
+        return formatDoule(money + "");
     }
 
     public static String formatDoule(String money) {
@@ -47,33 +42,5 @@ public class CommonUtil {
     public static int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         return wm.getDefaultDisplay().getWidth();
-    }
-
-
-    /**
-     * 从assets中读取txt
-     */
-    public static String getConfigJSON(Context context, String fileName) {
-        BufferedInputStream bis = null;
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        try {
-            bis = new BufferedInputStream(context.getAssets().open(fileName));
-            byte[] buffer = new byte[4096];
-            int readLen = -1;
-            while ((readLen = bis.read(buffer)) > 0) {
-                bos.write(buffer, 0, readLen);
-            }
-        } catch (IOException e) {
-            Log.e("", "IOException :" + e.getMessage());
-        } finally {
-            try {
-                if (bis != null)
-                    bis.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return bos.toString();
     }
 }

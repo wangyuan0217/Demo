@@ -8,13 +8,14 @@ import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
 
 import com.judd.trump.R;
+import com.judd.trump.app.TApplication;
 
 /**
  * @author 王元_Trump
  * @time 2017/3/6 14:38
  * @desc 类似于 验证码按钮的倒计时效果
  */
-public class CountDownTimerUtils extends CountDownTimer {
+public class CountDownUtils extends CountDownTimer {
     private TextView mTextView;
 
     /**
@@ -25,7 +26,7 @@ public class CountDownTimerUtils extends CountDownTimer {
      * @param countDownInterval The interval along the way to receiver
      *                          {@link #onTick(long)} callbacks.
      */
-    public CountDownTimerUtils(TextView textView, long millisInFuture, long countDownInterval) {
+    public CountDownUtils(TextView textView, long millisInFuture, long countDownInterval) {
         super(millisInFuture, countDownInterval);
         this.mTextView = textView;
     }
@@ -48,7 +49,7 @@ public class CountDownTimerUtils extends CountDownTimer {
          * http://blog.csdn.net/ah200614435/article/details/7914459
          */
         SpannableString spannableString = new SpannableString(mTextView.getText().toString());  //获取按钮上的文字
-        ForegroundColorSpan span = new ForegroundColorSpan(ContextCompat.getColor(mTextView.getContext(), R.color.orchid));
+        ForegroundColorSpan span = new ForegroundColorSpan(TApplication.getInstance().getThemeColor());
         /**
          * public void setSpan(Object what, int start, int end, int flags) {
          * 主要是start跟end，start是起始位置,无论中英文，都算一个。
@@ -62,6 +63,6 @@ public class CountDownTimerUtils extends CountDownTimer {
     public void onFinish() {
         mTextView.setText("重新获取验证码");
         mTextView.setClickable(true);//重新获得点击
-        mTextView.setTextColor(ContextCompat.getColor(mTextView.getContext(), R.color.orchid));
+        mTextView.setTextColor(TApplication.getInstance().getThemeColor());
     }
 }

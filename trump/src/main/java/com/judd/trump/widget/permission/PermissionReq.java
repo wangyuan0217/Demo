@@ -17,7 +17,13 @@ import java.util.List;
 /**
  * @author 王元_Trump
  * @time 2017/3/20 13:52
- * @desc example
+ * @desc before use add in activity or fragment
+ * @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+ * super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+ * PermissionReq.onRequestPermissionsResult(requestCode, permissions, grantResults);
+ * }
+ * <p>
+ * example
  * PermissionReq.with(SplashActivity.this)
  * .permissions(Permissions.STORAGE)
  * .result(new PermissionResult() {

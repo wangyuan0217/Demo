@@ -12,6 +12,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.judd.trump.R;
+import com.judd.trump.app.TApplication;
 import com.judd.trump.widget.pickerview.lib.LoopView;
 import com.judd.trump.widget.pickerview.lib.OnItemSelectedListener;
 
@@ -90,6 +91,7 @@ public class PopDateHelper extends PopupWindow {
         final LoopView loopView1 = (LoopView) view.findViewById(R.id.loopView1);
         final LoopView loopView2 = (LoopView) view.findViewById(R.id.loopView2);
         final LoopView loopView3 = (LoopView) view.findViewById(R.id.loopView3);
+        btnOk.setTextColor(TApplication.getInstance().getThemeColor());
 
         loopView1.setItems(list_year);
         loopView2.setItems(list_month);

@@ -285,10 +285,11 @@ public class SystemUtil {
         sendIntent.putExtra(Intent.EXTRA_STREAM, uris);
         sendIntent.setType("image/*");
         ctx.startActivity(Intent.createChooser(sendIntent, "分享至"));
-    }/*
+    }
+
+    /*
     * 打开设置网络界面
     */
-
     public static void setNetwork(final Context context) {
         // 提示对话框
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

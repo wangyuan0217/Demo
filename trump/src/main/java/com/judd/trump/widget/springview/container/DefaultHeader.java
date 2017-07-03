@@ -32,7 +32,7 @@ public class DefaultHeader extends BaseHeader {
     private ProgressBar headerProgressbar;
 
     public DefaultHeader(Context context) {
-        this(context, 0, R.mipmap.arrow);
+        this(context, 0, R.drawable.arrow);
     }
 
     public DefaultHeader(Context context, int rotationSrc, int arrowSrc) {

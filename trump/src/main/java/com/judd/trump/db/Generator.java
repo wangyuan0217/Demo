@@ -2,9 +2,10 @@ package com.judd.trump.db;
 
 
 /**
- * Created by Administrator on 2017/3/3.
+ * @author 王元_Trump
+ * @time 2017/7/3 13:59
+ * @desc The Generator for GreenDAO
  */
-
 public class Generator {
 
     public static void main(String[] args) throws Exception {

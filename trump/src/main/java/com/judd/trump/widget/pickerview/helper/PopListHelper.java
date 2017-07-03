@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 
 import com.judd.trump.R;
+import com.judd.trump.app.TApplication;
 import com.judd.trump.widget.pickerview.lib.LoopView;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class PopListHelper extends PopupWindow {
         this.setTouchable(true);
         this.setOutsideTouchable(true);
 
-        this.setAnimationStyle(android.R.style.Theme_Material_InputMethod);
+        this.setAnimationStyle(android.R.style.Theme_Holo_InputMethod);
 
         initView();
     }
@@ -58,6 +59,8 @@ public class PopListHelper extends PopupWindow {
         Button btnCancel = (Button) view.findViewById(R.id.btnCancel);
         Button btnOk = (Button) view.findViewById(R.id.btnOK);
         loopView = (LoopView) view.findViewById(R.id.loopView);
+
+        btnOk.setTextColor(TApplication.getInstance().getThemeColor());
 
         loopView.setItems(list_data);
         loopView.setNotLoop();

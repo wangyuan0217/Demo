@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.judd.trump.widget.commonview.ProgressWheel
+        <com.judd.trump.widget.commonview.LoadingProgressWheel
             android:id="@+id/progress_wheel"
             android:layout_width="110dp"
             android:layout_height="110dp"

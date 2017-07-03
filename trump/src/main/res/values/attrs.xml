@@ -397,7 +397,7 @@
     <!-- Banner end-->
 
     <!--material progress start-->
-    <declare-styleable name="ProgressWheel">
+    <declare-styleable name="LoadingProgressWheel">
         <attr name="matProg_progressIndeterminate" format="boolean" />
         <attr name="matProg_barColor" format="color" />
         <attr name="matProg_rimColor" format="color" />
