@@ -10,6 +10,8 @@
 
     <!-- MenuItemView -->
     <declare-styleable name="MenuItemView">
+        <!--cell 高度-->
+        <attr name="cellHeight" format="dimension"/>
         <!--布局中左边的icon-->
         <attr name="leftIcon" format="reference"/>
         <!--布局中右边的icon-->
@@ -398,16 +400,16 @@
 
     <!--material progress start-->
     <declare-styleable name="LoadingProgressWheel">
-        <attr name="matProg_progressIndeterminate" format="boolean" />
-        <attr name="matProg_barColor" format="color" />
-        <attr name="matProg_rimColor" format="color" />
-        <attr name="matProg_rimWidth" format="dimension" />
-        <attr name="matProg_spinSpeed" format="float" />
-        <attr name="matProg_barSpinCycleTime" format="integer" />
-        <attr name="matProg_circleRadius" format="dimension" />
-        <attr name="matProg_fillRadius" format="boolean" />
-        <attr name="matProg_barWidth" format="dimension" />
-        <attr name="matProg_linearProgress" format="boolean" />
+        <attr name="matProg_progressIndeterminate" format="boolean"/>
+        <attr name="matProg_barColor" format="color"/>
+        <attr name="matProg_rimColor" format="color"/>
+        <attr name="matProg_rimWidth" format="dimension"/>
+        <attr name="matProg_spinSpeed" format="float"/>
+        <attr name="matProg_barSpinCycleTime" format="integer"/>
+        <attr name="matProg_circleRadius" format="dimension"/>
+        <attr name="matProg_fillRadius" format="boolean"/>
+        <attr name="matProg_barWidth" format="dimension"/>
+        <attr name="matProg_linearProgress" format="boolean"/>
     </declare-styleable>
     <!--material progress end-->
 

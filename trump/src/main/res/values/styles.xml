@@ -25,4 +25,18 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <!--toolbar菜单主题  ?? parent  ?  Widget.AppCompat.Light.PopupMenu.Overflow-->
+    <style name="OverFlowMenuTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- 设置Menu菜单的背景色 -->
+        <item name="android:itemBackground">@android:color/white</item>
+        <!-- 设置Menu菜单的字体颜色 -->
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <!-- false 设置Menu窗口不覆盖Toolbar视图 -->
+        <item name="overlapAnchor">true</item>
+        <!-- 弹出层垂直方向上的偏移，即在竖直方向上距离Toolbar的距离，值为负则会盖住Toolbar -->
+        <!--<item name="android:dropDownVerticalOffset">-50dp</item>-->
+        <!-- 弹出层水平方向上的偏移，即距离屏幕左边的距离，负值会导致右边出现空隙 -->
+        <!--<item name="android:dropDownHorizontalOffset">-100dp</item>-->
+    </style>
+
 </resources>

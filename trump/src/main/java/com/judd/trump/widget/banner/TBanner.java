@@ -243,7 +243,7 @@ public class TBanner extends RelativeLayout {
         });
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         //默认实现了Glide加载图片
-        Glide.with(getContext()).load(url).centerCrop().into(imageView);
+        Glide.with(getContext()).load(url).into(imageView);
         return imageView;
     }
 

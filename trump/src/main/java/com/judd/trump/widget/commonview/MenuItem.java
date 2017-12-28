@@ -44,12 +44,14 @@ public class MenuItem extends RelativeLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        LayoutInflater.from(context).inflate(R.layout.layout_menuitem, this);
+        LayoutInflater.from(context).inflate(R.layout.view_menuitem, this);
 
         initView();
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.MenuItemView);
         String text = ta.getString(R.styleable.MenuItemView_text);
+        float cellHeight = ta.getDimension(R.styleable.MenuItemView_cellHeight,
+                getResources().getDimension(R.dimen.default_menuitem_height));
         float textSize = ta.getDimension(R.styleable.MenuItemView_textSize,
                 getResources().getDimension(R.dimen.default_menuitem_textSize));
         int textColor = ta.getColor(R.styleable.MenuItemView_textColor, DEFAULT_TEXTCOLOR);
@@ -61,6 +63,11 @@ public class MenuItem extends RelativeLayout {
         String textRight = ta.getString(R.styleable.MenuItemView_rightText);
         boolean showSwitchButton = ta.getBoolean(R.styleable.MenuItemView_showSwitchButton, false);
         ta.recycle();
+
+        //cell高度
+        LayoutParams layoutParams = (LayoutParams) layout.getLayoutParams();
+        layoutParams.height = (int) cellHeight;
+        layout.setLayoutParams(layoutParams);
 
         //字体大小
         menuText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);

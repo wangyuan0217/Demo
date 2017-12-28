@@ -116,21 +116,6 @@ public class SystemUtil {
     }
 
     /**
-     * 获取设备号
-     *
-     * @param context
-     * @return
-     */
-    public static String getDeviceIMEI(Context context) {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        if (telephonyManager == null || TextUtils.isEmpty(telephonyManager.getDeviceId())) {
-            return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        } else {
-            return telephonyManager.getDeviceId();
-        }
-    }
-
-    /**
      * 获取应用的版本号
      *
      * @param context

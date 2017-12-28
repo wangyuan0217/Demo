@@ -1,25 +1,27 @@
 package com.judd.trump.base;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.judd.trump.R;
-import com.judd.trump.app.ActivityManager;
-import com.judd.trump.app.TApplication;
+import com.judd.trump.util.ActivityManager;
+import com.judd.trump.widget.commonview.LoadingDialog;
 import com.judd.trump.widget.permission.PermissionReq;
+
+import butterknife.ButterKnife;
 
 
 /**
@@ -28,27 +30,37 @@ import com.judd.trump.widget.permission.PermissionReq;
  * @time 2016/6/2 14:15
  */
 public abstract class TActivity extends AppCompatActivity
-        implements OnClickListener {
-
+        implements OnClickListener, Toolbar.OnMenuItemClickListener {
 
     public Context mContext;
 
     protected abstract void setContentView();
 
-    protected abstract void bindView();
-
     protected abstract void initData(Bundle savedInstance);
 
     @Override
     protected void onCreate(Bundle savedInstance) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstance);
         mContext = this;
         ActivityManager.getActivityManager().pushActivity(this);
-
+        beforeSetContentView();
         setContentView();
+        ButterKnife.bind(this);
         bindView();
 
         initData(savedInstance);
+    }
+
+    protected void hideActionBar() {
+        if (null != getSupportActionBar())
+            getSupportActionBar().hide();
+    }
+
+    protected void bindView() {
+    }
+
+    protected void beforeSetContentView() {
     }
 
     public void onResume() {
@@ -63,6 +75,23 @@ public abstract class TActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         ActivityManager.getActivityManager().popActivity(this);
+    }
+
+    public void showRequestError(int code, String errmsg) {
+        showToast(errmsg);
+        dismissLoadingDialog();
+    }
+
+    protected void showLoadingDialog(String message) {
+        LoadingDialog.show(mContext, message);
+    }
+
+    protected void showLoadingDialog() {
+        showLoadingDialog("");
+    }
+
+    protected void dismissLoadingDialog() {
+        LoadingDialog.dismiss(mContext);
     }
 
     ///////////////////////////
@@ -100,6 +129,66 @@ public abstract class TActivity extends AppCompatActivity
     ///////////////////////////
 
 
+    /////////////////////////////
+    //title START
+    /////////////////////////////
+
+    public void initTitle() {
+        String title = getTitle().toString();
+        if (TextUtils.isEmpty(title)) {
+            showtToastLong("title text is null");
+        }
+        initTitle(title, null, 0);
+    }
+
+    public void initTitle(String title) {
+        initTitle(title, null, 0);
+    }
+
+    public void initTitle(String title, String subTitle) {
+        initTitle(title, subTitle, 0);
+    }
+
+    public void initTitle(String title, int subImgRes) {
+        initTitle(title, null, subImgRes);
+    }
+
+    public void initTitle(String title, String subTitle, int subImgRes) {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        if (toolbar == null) return;
+        ((TextView) findViewById(R.id.title)).setText(title);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (null == actionBar) return;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+//        toolbar.inflateMenu(R.menu.single_menu);
+        toolbar.setOnMenuItemClickListener(this);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        return false;
+    }
+
+    public void title_left() {
+        finish();
+    }
+
+    public void title_right() {
+    }
+
+    /////////////////////////////
+    //title END
+    /////////////////////////////
+
+
     ///////////////////////////
     //Toast start
     ///////////////////////////
@@ -122,30 +211,6 @@ public abstract class TActivity extends AppCompatActivity
     public void onClick(View view) {
 
     }
-
-
-    /////////////////////////////
-    //AlertDialog  start
-    /////////////////////////////
-    public void showAlertDialog(String message, DialogInterface.OnClickListener positiveListener) {
-        showAlertDialog("提示", message, "确定", "取消", positiveListener, null);
-    }
-
-    public void showAlertDialog(String title, String message, String positiveTip, String negativeTip,
-                                DialogInterface.OnClickListener positiveListener,
-                                DialogInterface.OnClickListener nagetiveListener) {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(positiveTip, positiveListener)
-                .setNegativeButton(negativeTip, nagetiveListener)
-                .create();
-        dialog.show();
-    }
-    /////////////////////////////
-    //AlertDialog end
-    /////////////////////////////
-
 
     /////////////////////////////
     // Fragment start
@@ -172,69 +237,11 @@ public abstract class TActivity extends AppCompatActivity
     //Fragment end
     /////////////////////////////
 
-
-    /////////////////////////////
-    //title START
-    /////////////////////////////
-
-    public void initTitle(String title) {
-        initTitle(title, null, 0);
-    }
-
-    public void initTitle(String title, String subTitle) {
-        initTitle(title, subTitle, 0);
-    }
-
-    public void initTitle(String title, int subImgRes) {
-        initTitle(title, null, subImgRes);
-    }
-
-    public void initTitle(String title, String subTitle, int subImgRes) {
-        findViewById(R.id.layout_title).setBackgroundColor(TApplication.getInstance().getThemeColor());
-        ((ImageView) findViewById(R.id.title_back)).setImageResource(TApplication.getInstance().getTitleBackImg());
-        ((TextView) findViewById(R.id.title_tv)).setText(title);
-        if (!TextUtils.isEmpty(subTitle))
-            ((TextView) findViewById(R.id.title_right_tv)).setText(subTitle);
-        if (0 != subImgRes) {
-            findViewById(R.id.title_right_img).setVisibility(View.VISIBLE);
-            ((ImageView) findViewById(R.id.title_right_img)).setImageResource(subImgRes);
-        }
-        findViewById(R.id.title_back).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                title_left();
-            }
-        });
-        findViewById(R.id.title_right_tv).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                title_right();
-            }
-        });
-        findViewById(R.id.title_right_img).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                title_right();
-            }
-        });
-    }
-
-    public void title_left() {
-        finish();
-    }
-
-    public void title_right() {
-    }
-
-    /////////////////////////////
-    //title END
-    /////////////////////////////
-
     /////////////////////////////
     //6.0 PERMISSIONS START
     /////////////////////////////
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PermissionReq.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }

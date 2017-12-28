@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="mThemeColor">#3F51B5</color>
+    <color name="recyclerDividerColor">#eeeeee</color>
+
+
     <color name="m333333">#333333</color>
     <color name="m232323">#232323</color>
     <color name="m555555">#555555</color>
     <color name="m666666">#666666</color>
     <color name="m999999">#999999</color>
+    <color name="meeeeee">#eeeeee</color>
 
+    <color name="dialog_list_divider_color">#dfdfdd</color>
     <color name="selector_pressed">#d2d2d2</color>
 
     <color name="transparent">#00000000</color><!--透明色 -->

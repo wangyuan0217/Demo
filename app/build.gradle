@@ -1,26 +1,49 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.0'
     defaultConfig {
         applicationId "com.trump.demo"
         minSdkVersion 17
-        targetSdkVersion 25
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "android.support.single_menu.runner.AndroidJUnitRunner"
+//        testApplicationId 'com.trump.demo.dev'
+//        versionNameSuffix 'beta'
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            buildConfigField "boolean", "LOG_DEBUG", "true"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        release {
+            //混淆
+            minifyEnabled true
+            //移除无用的resource资源(需要先混淆)
+            shrinkResources false
+            //zipAlign优化(和体积没有关系)
+            zipAlignEnabled false
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+    productFlavors {
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile project(':trump')
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha6'
 }

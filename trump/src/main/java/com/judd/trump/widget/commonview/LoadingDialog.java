@@ -47,7 +47,7 @@ public class LoadingDialog extends Dialog {
         this.canNotCancel = canNotCancel;
         this.tipMsg = tipMsg;
         this.getContext().setTheme(android.R.style.Theme_InputMethod);
-        setContentView(R.layout.layout_dialog_loading);
+        setContentView(R.layout.dialog_loading);
 
         if (!TextUtils.isEmpty(this.tipMsg)) {
             mShowMessage = (TextView) findViewById(R.id.show_message);

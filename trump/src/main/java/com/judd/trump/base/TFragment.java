@@ -2,18 +2,16 @@ package com.judd.trump.base;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.judd.trump.widget.commonview.LoadingDialog;
 import com.judd.trump.widget.permission.PermissionReq;
 
 /**
@@ -53,6 +51,23 @@ public abstract class TFragment extends Fragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
     }
 
+
+    public void showRequestError(int code, String errmsg) {
+        showToast(errmsg);
+        dismissLoadingDialog();
+    }
+
+    protected void showLoadingDialog(String message) {
+        LoadingDialog.show(mContext, message);
+    }
+
+    protected void showLoadingDialog() {
+        showLoadingDialog("");
+    }
+
+    protected void dismissLoadingDialog() {
+        LoadingDialog.dismiss(mContext);
+    }
 
     @Override
     public void onDestroyView() {
@@ -118,28 +133,6 @@ public abstract class TFragment extends Fragment implements View.OnClickListener
     /////////////////////////////
 
 
-    /////////////////////////////
-    //AlertDialog  start
-    /////////////////////////////
-    public void showAlertDialog(String message, DialogInterface.OnClickListener positiveListener) {
-        showAlertDialog("提示", message, "确定", "取消", positiveListener, null);
-    }
-
-    public void showAlertDialog(String title, String message, String positiveTip, String negativeTip,
-                                DialogInterface.OnClickListener positiveListener,
-                                DialogInterface.OnClickListener nagetiveListener) {
-        AlertDialog dialog = new AlertDialog.Builder(mContext)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(positiveTip, positiveListener)
-                .setNegativeButton(negativeTip, nagetiveListener)
-                .create();
-        dialog.show();
-    }
-    /////////////////////////////
-    //AlertDialog end
-    /////////////////////////////
-
     public void showToast(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
@@ -152,7 +145,7 @@ public abstract class TFragment extends Fragment implements View.OnClickListener
     //6.0 PERMISSIONS START
     /////////////////////////////
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PermissionReq.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }

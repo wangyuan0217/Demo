@@ -1,13 +1,19 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.0'
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
         versionName '1.0'
+
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'arm64-v8a', 'armeabi' //, 'x86', , 'x86_64', 'arm64-v8a'
+        }
     }
     buildTypes {
         debug {
@@ -19,46 +25,37 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    //兼容API 23干掉了httpClient
-//    useLibrary 'org.apache.http.legacy'
-
-    //只支持中文
-    defaultConfig {
-        resConfigs "zh"
-    }
 }
 
 dependencies {
-    //basic support
-    //    compile "com.android.support:recyclerview-v7:$rootProject.ext.androidSupportSdkVersion"
+    //latest.integration
+    compile('com.android.support:design:26.0.0') {
+        exclude group: 'com.android.support', module: 'multidex'
+        exclude group: 'com.android.support', module: 'animated-vector-drawable'
+        exclude group: 'com.android.support', module: 'support-media-compat'
+        exclude group: 'com.android.support', module: 'transition'
+    }
 
-    //RxJava + Retrofit
-//    compile "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
-//    compile "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxjavaVersion"
-    //compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofit2Version"
-//    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    //okhttp-log
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    //Glide
-    //Log
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
 
-    //GreenDao
-//    compile 'de.greenrobot:greendao-generator:2.1.0'
-//    compile 'de.greenrobot:greendao:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
 
-    //BaseRecyclerView
-    //latest.release
-
-    //for index lib  for indexbar
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.3'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.4'
+    compile('com.github.zhaokaiqiang.klog:library:1.6.0') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.31'
+    compile 'com.github.chenBingX:SuperTextView:v1.3'
     compile 'com.github.promeg:tinypinyin:2.0.3'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha6'
+    compile 'com.github.chrisbanes.photoview:library:1.2.4'
+    compile ('com.jph.takephoto:takephoto_library:4.0.3'){
+        exclude group: 'io.reactivex'
+    }
 }

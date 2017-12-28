@@ -1,5 +1,6 @@
 package com.judd.trump.util;
 
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
@@ -8,7 +9,6 @@ import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
 
 import com.judd.trump.R;
-import com.judd.trump.app.TApplication;
 
 /**
  * @author 王元_Trump
@@ -49,7 +49,7 @@ public class CountDownUtils extends CountDownTimer {
          * http://blog.csdn.net/ah200614435/article/details/7914459
          */
         SpannableString spannableString = new SpannableString(mTextView.getText().toString());  //获取按钮上的文字
-        ForegroundColorSpan span = new ForegroundColorSpan(TApplication.getInstance().getThemeColor());
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.RED);
         /**
          * public void setSpan(Object what, int start, int end, int flags) {
          * 主要是start跟end，start是起始位置,无论中英文，都算一个。
@@ -63,6 +63,6 @@ public class CountDownUtils extends CountDownTimer {
     public void onFinish() {
         mTextView.setText("重新获取验证码");
         mTextView.setClickable(true);//重新获得点击
-        mTextView.setTextColor(TApplication.getInstance().getThemeColor());
+        mTextView.setTextColor(Color.BLACK);
     }
 }
