@@ -27,6 +27,9 @@ public class MainActivity extends TActivity {
         } else {
             mButton.setText("success");
         }
+        
+        //test edit
+        //the comment was updated on Github the origan master
     }
 
     public void toNext(View view) {
